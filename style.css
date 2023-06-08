@@ -1,0 +1,989 @@
+@charset "UTF-8";
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-x: clip;
+}
+html {
+    font-size: 100%;
+    scroll-padding-top: 4em;
+}
+body {
+    color: #5B4747;
+    background-image: url(../image/Background-pk.png);
+    background-repeat: repeat;
+}
+img {
+    max-width: 100%;
+    vertical-align: bottom;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+h1, h2, h3 {
+    font-weight: normal;
+}
+#mainvisual {
+    width: 390px;
+    height: 688px;
+    margin: 0 auto 64px auto;
+    position: relative;
+    .reserve-button-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        top: 81%;
+        right: 4.1%;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background-color: #DDB7AC;
+        color: #fff;
+        transition: transform .2s;
+        &:active{
+        transform: scale(.95);
+    }
+    }
+    .mainvisual-pc {
+        display: none;
+    }
+    .reserve-button-top .ja {
+        font-family: 'fot-tsukubrdgothic-std', sans-serif;
+        font-size: 1.125rem;
+        line-height: 24px;
+    }
+    .reserve-button-top .en {
+        font-family: 'sacre-bleu-mvb', sans-serif;
+        font-size: 0.625rem;
+        line-height: 16px;
+    }
+    .site-title-top {
+        position: absolute;
+        top: 77%;
+        left: 8.2%;
+        zoom: 0.5;
+    }
+}
+.mainvisual img {
+    zoom: 0.25;
+}
+
+
+/* HEADER */
+#header {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+    background-color: rgba(255, 253, 245, 0.75);
+    position: fixed;
+    z-index: 10;
+}
+#header .nemu-left {
+    display: flex;
+}
+#header .logo {
+    height: 40px;
+    width: 40px;
+    margin: 8px 16px 8px 16px;
+}
+#header .site-title {
+    zoom: 0.5;
+    margin: 24px 0 8px 0;
+}
+#header .nemu-right {
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 30;
+    cursor: pointer;
+    transition: all .4s;
+    margin: 8px 16px;
+}
+#header .nemu-right span {
+    width: 16px;
+    height: 1px ;
+    background: #5B4747;
+    position: absolute;
+    left: 16px;
+    border-radius: 4px;
+    transition: all .4s;
+  }
+#header .nemu-right span:nth-child(1) {
+    top: 12px;
+}
+#header .nemu-right span:nth-child(2) {
+    width: 24px;
+    top: 20px;
+    left: 8px;
+}
+#header .nemu-right span:nth-child(3) {
+    top: 28px;
+}
+
+
+/*NAVI NAVI.active*/
+#header .nemu-right.active span:nth-child(1) {
+    transform: translateY(8px) rotate(-45deg);
+  }
+#header .nemu-right.active span:nth-child(2) {
+    left: 50%;
+    opacity: 0;
+    animation: active-menu-right .8s forwards;
+  }
+  @keyframes active-menu-right {
+    100% {
+      height: 0;
+    }
+  }
+#header .nemu-right.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(45deg);
+}
+#navi.active {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    text-align: center;
+  }
+  #navi .shop-title,
+  #navi ul {
+    opacity: 0;/*はじめは透過0*/
+    display: none;
+  }
+  
+  /*背景が出現後にナビゲーションを表示*/
+  #navi.active .shop-title,
+  #navi.active ul {
+      opacity:1;
+      display: block;
+  }
+  
+  /* 背景が出現後にナビゲーション li を表示※レイアウトによって調整してください。不必要なら削除*/
+  #navi.active .shop-title,
+  #navi.active ul li{
+  animation-name:gnaviAnime;
+  animation-duration:1s;
+  animation-delay:.2s;/*0.2 秒遅らせて出現*/
+  animation-fill-mode:forwards;
+  opacity:0;
+  }
+  @keyframes gnaviAnime{
+  0% {
+  opacity: 0;
+  }
+  100% {
+  opacity: 1;
+  }
+  }
+
+#navi .site-title {
+    margin: 24px 0 8px 0;
+}
+#navi .navi-menu img {
+    zoom: 0.5;
+}
+#navi li {
+    margin-bottom: 24px;
+}
+#navi li:last-child {
+    margin-bottom: 64px;
+}
+.circle-bg{
+    position: fixed;
+    z-index:3;
+    /*丸の形*/
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: rgba(255, 253, 245, 1);
+    /*丸のスタート位置と形状*/
+    transform: scale(0);/*scaleをはじめは0に*/
+    right:-50px;
+    top:calc(50% - 50px);/*50%から円の半径を引いた値*/
+    transition: all .6s;/*0.6秒かけてアニメーション*/
+}
+.circle-bg.circleactive{
+    transform: scale(50);/*クラスが付与されたらscaleを拡大*/
+  }
+
+
+/*ABOUT*/
+
+.sec-title-about {
+    text-align: center;
+}
+.sec-title-about h2 {
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: #DDB7AC;
+}
+.sec-title-about p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1;
+}
+.about-contents {
+    width: 390px;
+    margin: 0 auto;
+}
+.about-img img {
+    zoom: 0.5;
+}
+.about-text {
+ margin: 9.2px 0 54px 24px;
+}
+.about-text .copy-title {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.778;
+    margin-bottom: 13px;
+}
+.about-text .description {
+    display: block;
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 3;
+}
+
+
+/*MENU*/
+.sec-title-menu {
+    text-align: center;
+}
+.sec-title-menu h2 {
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: #DDB7AC;
+}
+.sec-title-menu p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1;
+    margin-top: 2px;
+}
+.menu-list {
+    text-align: center;
+    margin-top: 52px;
+    position: relative;
+    .flower-top {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.menu-list img {
+    zoom: 0.5;
+}
+.menu-list .tea {
+    margin: 0 auto;
+    margin-bottom: 63px;
+    width: 109px;
+    position: relative;
+    .caffeine-sm {
+        position: absolute;
+        top: 218px;
+        right: -78px;
+    }
+    .subtitle-drink {
+        position: absolute;
+        top: -14px;
+        left: -73px;
+    }
+    .subtitle-drink-gd {
+        position: absolute;
+        top: 148px;
+        right: -26px;
+    }
+}
+.menu-list .tea .tea-lavender {
+    margin-bottom: 32px;
+}
+.menu-list .food {
+    margin: 0 auto;
+    width: 106px;
+    margin-bottom: 61px;
+    position: relative;
+    .subtitle-food {
+        position: absolute;
+        top: -15.2px;
+        left: -73px;
+    }
+    .subtitle-food-gd {
+        position: absolute;
+        top: 162px;
+        right: -30px;
+    }
+}
+.menu-list .food img {
+    margin-bottom: 16px;
+}
+.menu-list .desert {
+    margin: 0 auto;
+    width: 110px;
+    position: relative;
+    .subtitle-desert {
+        position: absolute;
+        top: -13px;
+        left: -73px;
+    }
+    .subtitle-desert-gd {
+        position: absolute;
+        top: 166px;
+        right: -10px;
+    }
+}
+.menu-list .desert img {
+    margin-bottom: 16px;
+}
+.menu-list .sub-title {
+    display: flex;
+    flex-direction: column;
+}
+.more-button-tea,
+.more-button-food,
+.more-button-desert {
+    position: relative;
+    margin: 0 auto;
+    display:block;
+    width: 72px;
+    height: 24px;
+    border-radius: 15px;
+    background-color: #999B85;
+    transition: transform .2s;
+    &:active{
+        transform: scale(.95);
+    }
+    .more-sentence {
+            position:absolute;
+            top:50%;
+            left: 50%; 
+            transform: translate(-50%, -50%);
+           }
+}
+.more-button img {
+    zoom: 0.5;
+}
+
+
+/*RESERVE*/
+#reserve {
+    width: 100%;
+    height: 96px;
+    text-align:center;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    background-image: url(../image/Background\ -\ Reserve.png);
+    background-size: cover;
+    background-position: top center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .reserve-button-center {
+        width: 152px;
+        height: 32px;
+        border-radius: 16px;
+        background-color: #F4EFEC;
+        transition: transform .2s;
+        &:active{
+            transform: scale(.95);
+        }
+    }
+}
+#reserve .reserve-button-center p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 1rem;
+    line-height: 32px;
+    color: #5B4747;
+}
+
+
+/*STORY*/
+#story img {
+    zoom: 0.5;
+}
+.sec-title-story {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.sec-title-story h2 {
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: #DDB7AC;
+}
+.sec-title-story p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1;
+    margin-top: 10px;
+}
+.image {
+    text-align: center;
+}
+.story01,
+.story02,
+.story03 {
+    margin: 0 auto;
+    width: 192px;
+}
+.story01 h3,
+.story02 h3,
+.story03 h3 {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 6px;
+} 
+.story01 p,
+.story02 p {
+    display: block;
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 3;
+}
+.story02 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+.story03 p {
+    display: block;
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 3;
+    margin-bottom: 54px;
+}
+
+
+/*GALLERY*/
+#gallery {
+    background-image: url(../image/Background-gallery.jpg);
+    background-repeat: repeat;
+}
+#gallery img {
+    zoom: 0.5;
+}
+.sec-title-gallery {
+    text-align: center;
+    padding: 32px 0;
+}
+.sec-title-gallery h2 {
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: #DDB7AC;
+}
+.sec-title-gallery p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1;
+    margin-top: 10px;
+}
+.photo01 {
+    margin: 0 auto;
+    width: 358.08px;
+    display: flex;
+    justify-content: space-between;
+}
+.photo01 .inner01 {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+.photo02 {
+    width: 358.08px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.photo02 .inner02 {
+    display: flex;
+    margin: 32px 0 30px 0;
+    justify-content: flex-start;
+}
+.photo02 .inner03 {
+    display: flex;
+    margin-bottom: 34px;
+    justify-content: flex-end;
+}
+.photo03 {
+    text-align: center;
+    padding-bottom: 64px;
+}
+.grid {
+    display: none;
+}
+.photo01-img01.scale,
+.photo01-img02.scale,
+.photo01-img03.scale,
+.photo02-img01.scale,
+.photo02-img02.scale,
+.photo03-img01.scale {
+    transform: scale(1.2, 1.2);
+}
+
+
+/*DRINK PAGE*/
+.title {
+    text-align: center;
+}
+.title h2 {
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: #DDB7AC;
+    padding-top: 80px;
+}
+.title p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1;
+    margin-top: 2px;
+    margin-bottom: 58px;
+}
+.drinkPage-menu-list {
+    text-align: center;
+    margin-top: 38px;
+    position: relative;
+    .flower {
+        position: absolute;
+        top: 17.4px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.drinkPage-menu-list img {
+    zoom: 0.5;
+}
+.tea-list {
+    margin: 0 auto;
+    width: 136px;
+    position: relative;
+    .caffeine {
+        position: absolute;
+        top: -198.4px;
+        left: 241px;
+    }
+    .subtitle-drink {
+        position: absolute;
+        top: -36px;
+        right: 271.6px;
+    }
+    .subtitle-lavender-gd {
+        position: absolute;
+        top: 144px;
+        left: 144px;
+    }
+    .subtitle-rosehip-gd {
+        position: absolute;
+        top: 624px;
+        left: 144px;
+    }
+    .subtitle-passionflower-gd {
+        position: absolute;
+        top: 1104px;
+        right: -16px;
+    }
+}
+.other-menu {
+    text-align: center;
+}
+.other-menu img {
+    zoom: 0.5
+}
+.other-menu .line-top {
+    margin-top: 128px;
+    margin-bottom: 64px;
+}
+.other-menu .line-bottom {
+    margin-top: 28px;
+    margin-bottom: 128px;
+}
+dl {
+    width: 169px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+dl dt {
+    width: 80%;
+    text-align: left;
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-bottom: 16px;
+  }
+dd {
+    width: 20%;
+    text-align: right;
+    font-family: 'sacre-bleu-mvb', sans-serif;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-bottom: 16px;
+  }
+
+
+/*FOOD PAGE*/
+.foodPage-menu-list {
+    margin: 0 auto;
+    width: 107px;
+    position: relative;
+    .subtitle-food {
+        position: absolute;
+        top: -34px;
+        right: 244px;
+    }
+    .quiche {
+        position: absolute;
+        top: 162px;
+        right: -28px;
+    }
+    .pasta {
+        position: absolute;
+        top: 530px;
+        right: -28px;
+    }
+}
+.foodPage-menu-list img {
+    zoom: 0.5;
+}
+
+
+/*DESERT PAGE*/
+.desertPage-menu-list {
+    margin: 0 auto;
+    width: 111px;
+    position: relative;
+    .subtitle-desert {
+        position: absolute;
+        top: -26px;
+        right: 250px;
+    }
+    .season-cake {
+        position: absolute;
+        top: 166px;
+        right: -22px;
+    }
+    .pie {
+        position: absolute;
+        top: 486px;
+        right: -22px;
+    }
+}
+.desertPage-menu-list img {
+    zoom: 0.5;
+}
+
+
+
+.shop-title {
+    zoom: 0.5;
+    text-align: center;
+  }
+.shop-title img {
+    margin-top: 80px;
+}
+.desert-title img,
+.food-title img,
+.drink-title img {
+    zoom: 0.5;
+}
+.desert-title .plants,
+.food-title .plants {
+    position: absolute;
+    top: 284px;
+    left: 203.6px;
+}
+.drink-title .plants {
+    position: absolute;
+    top: 284px;
+    left: 204px;
+}
+.desert-title .desert {
+    position: absolute;
+    top: 352px;
+    left: 210px;
+}
+.food-title .food,
+.drink-title .drink {
+    position: absolute;
+    top: 352px;
+    left: 198px;
+}
+.desert-menu,
+.food-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.drink-menu {
+    display:flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.desert-menu img,
+.food-menu img,
+.drink-menu img {
+    zoom: 0.5;
+}
+.desert-menu .cake {
+    margin-top: 74px;
+    margin-bottom: 26px;
+}
+.food-menu .quiche-img {
+    margin-top: 80px;
+    margin-bottom: 32px;
+}
+.desert-menu .sub-menu-title01 {
+    position: absolute;
+    top: 480px;
+    left: 448px;
+}
+.food-menu .sub-menu-title01 {
+    position: absolute;
+    top: 480px;
+    left: 432px;
+}
+.drink-menu {
+    position: relative;
+}
+.drink-menu .sub-menu-title01 {
+    position: absolute;
+    top: 144px;
+    left: 400px;
+}
+.drink-menu .sub-menu-title02 {
+    position: absolute;
+    top: 624px;
+    left: 400px;
+}
+.drink-menu .sub-menu-title03 {
+    position: absolute;
+    top: 1104px;
+    left: 400px;
+}
+.desert-menu .pie {
+    margin-top: 26px;
+    margin-bottom: 28px;
+}
+.food-menu .pasta-img {
+    margin-top: 30px;
+    margin-bottom: 32px;
+}
+.desert-menu .sub-menu-title02 {
+    position: absolute;
+    top: 800px;
+    left: 400px;
+}
+.food-menu .sub-menu-title02 {
+    position: absolute;
+    top: 848px;
+    left: 448px;
+}
+.caffeine {
+    position: absolute;
+    top: 70.8px;
+    left: 228.5px;
+}
+.caffeine img{
+    zoom: 0.5;
+}
+.shop-title {
+    margin-bottom: 48px;
+}
+
+
+/*FOOTER*/
+footer {
+    text-align: center;
+    height: auto;
+    width: 100%;
+    background-color: #DDB7AC;
+    position: relative;
+    overflow: hidden;
+    .background-flower01 {
+        position: absolute;
+        top: 140px;
+        left: -114px;
+    }
+    .background-flower02 {
+        position: absolute;
+        top: 37.6px;
+        right: -95px;
+    }
+}
+footer img {
+    zoom: 0.5;
+}
+footer .site-title-ft {
+    padding: 32px 0 16px 0;
+}
+footer .reserve-button {
+    position: relative;
+    text-align:center;
+    margin-bottom: 24px;
+    display:inline-block;
+    width: 152px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #F4EFEC;
+    transition: transform .2s;
+    &:active{
+        transform: scale(.95);
+    }
+}
+footer .reserve-button p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 1rem;
+    line-height: 32px;
+    color: #5B4747;
+}
+footer .access {
+    padding: 21px 0 13px 0;
+}
+footer .access p {
+    font-family: 'fot-tsukubrdgothic-std', sans-serif;
+    font-size: 0.625rem;
+    line-height: 1rem;
+
+}
+footer .copyright {
+    font-family: "Arial";
+    font-size: 0.625rem;
+    color: #fff;
+    padding-bottom: 8px;
+}
+
+@media screen and (min-width: 391px) {
+    
+    /*MAINVISUAL*/
+        #mainvisual {
+            width: fit-content;
+            max-width: 1920px;
+        }
+        .mainvisual {
+            display: none;
+        }
+        .mainvisual-pc {
+            display: block !important;
+            width: 100vw;
+            height: 100%;
+            object-fit: cover;
+        }
+}
+
+/*PC*/
+@media screen and (min-width:960px) {
+
+    /*MAINVISUAL*/
+    #mainvisual {
+        margin: 0 auto 128px auto;
+    }
+    
+    /*ABOUT*/
+    .about-text {
+        margin-bottom: 108px;
+       }
+    /*MENU*/
+        .menu-list {
+            display: flex;
+            justify-content: space-between;
+            max-width: 960px;
+            margin: 104px auto 0 auto;
+        }
+        .flower-top {
+            display: none;
+        }
+        .menu-list .tea,
+        .menu-list .food,
+        .menu-list .desert {
+            margin: 0;
+        }
+
+    /*RESERVE*/
+    #reserve {
+        margin-top: 128px;
+        margin-bottom: 128px;
+    }
+
+    /*STORY*/
+        #story {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .sec-title-story {
+            margin-bottom: 48px;
+        }
+        .story-contents {
+            display: flex;
+            justify-content: space-between;
+        }
+        .story01,
+        .story02,
+        .story03 {
+            margin: 48px 0 128px 0;
+        }
+
+    /*GALLERY*/
+        .sec-title-gallery {
+            padding: 64px 0;
+        }
+        .photo01,
+        .photo02,
+        .photo03 {
+            display: none;
+        }
+        .grid {
+            display: block;
+            margin: 0 auto;
+            max-width: 960px;
+            padding-bottom: 88px;
+        }
+        .grid-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .grid-list li {
+            width: calc(100%/3);
+            margin-bottom: 40px;
+            padding: 0 5px;
+        }
+        .grid-list li.g01,
+        .grid-list li.g04 {
+            padding-left: 0;
+        }
+        .grid-list li.g03,
+        .grid-list li.g06 {
+            padding-right: 0;
+        }
+        .grid-list li img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition:0.3s all;
+        }
+        .grid-list li img:hover {
+            transform: scale(1.2, 1.2);
+            transition:0.3s all;
+        }
+
+        
+    }
