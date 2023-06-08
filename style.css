@@ -13,7 +13,7 @@ html {
 }
 body {
     color: #5B4747;
-    background-image: url(../image/Background-pk.png);
+    background-image: url(image/Background-pk.png);
     background-repeat: repeat;
 }
 img {
@@ -389,7 +389,7 @@ h1, h2, h3 {
     text-align:center;
     margin-top: 64px;
     margin-bottom: 64px;
-    background-image: url(../image/Background\ -\ Reserve.png);
+    background-image: url(image/Background\ -\ Reserve.png);
     background-size: cover;
     background-position: top center;
     display: flex;
@@ -474,7 +474,7 @@ h1, h2, h3 {
 
 /*GALLERY*/
 #gallery {
-    background-image: url(../image/Background-gallery.jpg);
+    background-image: url(image/Background-gallery.jpg);
     background-repeat: repeat;
 }
 #gallery img {
